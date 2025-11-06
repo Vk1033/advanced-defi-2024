@@ -46,6 +46,16 @@ contract UniswapV2LiquidityTest is Test {
         // Write your code here
         // Don’t change any other code
         vm.prank(user);
+        router.addLiquidity({
+            tokenA: DAI,
+            tokenB: WETH,
+            amountADesired: 1000000 * 1e18,
+            amountBDesired: 100 * 1e18,
+            amountAMin: 1,
+            amountBMin: 1,
+            to: user,
+            deadline: block.timestamp
+        });
 
         assertGt(pair.balanceOf(user), 0, "LP = 0");
     }
@@ -67,6 +77,16 @@ contract UniswapV2LiquidityTest is Test {
         // Exercise - Remove liquidity from DAI / WETH pool
         // Write your code here
         // Don’t change any other code
+
+        router.removeLiquidity({
+            tokenA: DAI,
+            tokenB: WETH,
+            liquidity: liquidity,
+            amountAMin: 1,
+            amountBMin: 1,
+            to: user,
+            deadline: block.timestamp
+        });
 
         vm.stopPrank();
 
