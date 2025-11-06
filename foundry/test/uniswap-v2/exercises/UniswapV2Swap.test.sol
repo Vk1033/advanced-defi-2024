@@ -53,6 +53,10 @@ contract UniswapV2SwapTest is Test {
 
         // Write your code here
         // Don’t change any other code
+        vm.prank(user);
+        router.swapExactTokensForTokens(
+            amountIn, amountOutMin, path, user, block.timestamp
+        );
 
         assertGe(mkr.balanceOf(user), amountOutMin, "MKR balance of user");
     }
@@ -70,6 +74,10 @@ contract UniswapV2SwapTest is Test {
 
         // Write your code here
         // Don’t change any other code
+        vm.prank(user);
+        router.swapTokensForExactTokens(
+            amountOut, amountInMax, path, user, block.timestamp
+        );
 
         assertEq(mkr.balanceOf(user), amountOut, "MKR balance of user");
     }
